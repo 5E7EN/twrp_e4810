@@ -1,0 +1,3 @@
+add_lunch_combo omni_E4810-user
+add_lunch_combo omni_E4810-userdebug
+add_lunch_combo omni_E4810-eng
