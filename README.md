@@ -9,9 +9,9 @@ There are guides for that on the internet for this particular device.
 
 Here's my curated bash history dump that yielded a successful build and boot.  
 Built within a fresh Ubuntu 22 docker container.  
-You can ignore most of the BoardConfig and device.mk edits since they're shipped in this repo.
+You can ignore most of the BoardConfig and device.mk edits since they're shipped with this repo.
 
-```
+````bash
 # on host
 docker volume create twrp-build
 docker run --platform linux/amd64 -it --name twrp-e4810 -v twrp-build:/twrp ubuntu:22.04 bash
@@ -68,11 +68,10 @@ nano device/kyocera/E4810/BoardConfig.mk
 # modify default device config
 nano device/kyocera/E4810/device.mk
 replace entire file with:
-"""
+\```
 LOCAL_PATH := device/kyocera/E4810
-
-# Minimal TWRP without OTA and bootctrl (since omni minimal doesn't support out of the box)
-"""
+# Minimal without OTA and bootctrl (since omni minimal doesn't support out of the box)
+\```
 
 # use python 2
 alias python=python2
@@ -84,8 +83,8 @@ docker cp twrp-e4810:/twrp/out/target/product/E4810/boot.img <path-on-host-for-s
 
 # flash it via fastboot
 fastboot flash boot twrp-boot.img
-fastboot reboot recovery (might not work, use adb)
-```
+fastboot reboot recovery (may not work, use adb)
+````
 
 # Booting to TWRP
 
@@ -102,7 +101,7 @@ I didn't try `fastboot boot <path-to-twrp-boot.img>` since I'm under the impress
 # Notes
 
 - This is a minimal (omni) configuration
-- AVB flag has been disabled (see BoardConfig.mk).
+- AVB flag has been disabled (see BoardConfig.mk)
 - Uses the prebuilt kernel from stock boot.img
 - OTA logic has been removed (will eventually implement but couldn't build initially due to missing deps)
 - At the moment, this is a PoC w/o keypad navigation support. That is coming soon™...
