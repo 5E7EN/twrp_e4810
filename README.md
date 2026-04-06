@@ -2,7 +2,7 @@
 
 TWRP device tree for the Kyocera E4810 (Extreme)
 
-NOTE: To use the generated boot.img without issues, your bootloader must be unlocked!  
+NOTE: To use the generated boot.img without issues, your bootloader must be unlocked.  
 There are guides for that on the internet for this particular device.
 
 # Building TWRP
