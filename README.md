@@ -5,6 +5,12 @@ TWRP device tree for the Kyocera E4810 (Extreme)
 NOTE: To use the generated boot.img without issues, your bootloader must be unlocked.  
 There are guides for that on the internet for this particular device.
 
+### A Note on Navigation
+
+As per [this issue](https://github.com/TeamWin/Team-Win-Recovery-Project/issues/1485), TWRP doesn't support touchless devices. As such, it's recommended to use an OTG mouse instead.  
+Or, once in TWRP, connect via adb and execute OpenRecoveryScript [commands](https://twrp.me/faq/openrecoveryscript.html).  
+Lots can be accomplished with this alone.
+
 # Building TWRP
 
 Here's my curated bash history dump that yielded a successful build and boot.  
@@ -104,4 +110,4 @@ I didn't try `fastboot boot <path-to-twrp-boot.img>` since I'm under the impress
 - AVB flag has been disabled (see BoardConfig.mk)
 - Uses the prebuilt kernel from stock boot.img
 - OTA logic has been removed (will eventually implement but couldn't build initially due to missing deps)
-- At the moment, this is a PoC w/o keypad navigation support. That is coming soon™...
+- This TWRP boot.img should not be flashed to the device if the userdata is pending format right after unlocking/locking the bootloader since it is not equipped to handle the erase flag.
