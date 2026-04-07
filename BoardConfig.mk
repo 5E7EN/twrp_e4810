@@ -91,6 +91,7 @@ TW_USE_TOOLBOX := true
 TW_INCLUDE_REPACKTOOLS := true
 
 # TWRP crypto
+TW_INCLUDE_CRYPTO := true
 BOARD_USES_QCOM_DECRYPTION  := true
 
 # TWRP debug flags
