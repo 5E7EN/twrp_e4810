@@ -92,7 +92,7 @@ TW_INCLUDE_REPACKTOOLS := true
 
 # TWRP crypto
 TW_INCLUDE_CRYPTO := true
-TW_CRYPTO_USE_SYSTEM_VOLD := qseecomd hwservicemanager servicemanager keymaster-4-0
+TW_CRYPTO_USE_SYSTEM_VOLD := vendor.qseecomd hwservicemanager servicemanager keymaster-4-0
 TW_CRYPTO_SYSTEM_VOLD_MOUNT := mnt/vendor/persist
 
 # TWRP debug flags
