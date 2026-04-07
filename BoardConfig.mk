@@ -97,3 +97,4 @@ TW_CRYPTO_SYSTEM_VOLD_MOUNT := mnt/vendor/persist
 
 # TWRP debug flags
 TW_CRYPTO_SYSTEM_VOLD_DEBUG := true
+TWRP_EVENT_LOGGING := true
