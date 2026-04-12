@@ -46,7 +46,7 @@ export PATH=~/bin:$PATH
 git config --global user.email "you@example.com"
 git config --global user.name "Your Name"
 
-repo init --depth=1 -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni.git -b twrp-9.0
+repo init --depth=1 -u https://github.com/5E7EN/platform_manifest_twrp_omni.git -b twrp-9.0
 
 apt install -y python2
 python2 --version (confirm it says version 2)
