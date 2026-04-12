@@ -7,7 +7,7 @@ There are guides for that on the internet for this particular device.
 
 ### A Note on Navigation
 
-As per [this issue](https://github.com/TeamWin/Team-Win-Recovery-Project/issues/1485), TWRP doesn't support touchless devices. As such, I've forked TWRP and implemented it myself [here](https://github.com/5E7EN/android_bootable_recovery).  
+As per [this issue](https://github.com/TeamWin/Team-Win-Recovery-Project/issues/1485), TWRP doesn't support touchless devices. As such, I've forked TWRP and implemented it myself [here](https://github.com/5E7EN/android_bootable_recovery/tree/android-9.0).  
 To use this fork, simply sync my (2nd) forked [manifests repo](https://github.com/5E7EN/platform_manifest_twrp_omni) instead, that'll point to my modified TWRP.  
 This has already been included in the bash commands below, assuming you're following that as a guide.
 
