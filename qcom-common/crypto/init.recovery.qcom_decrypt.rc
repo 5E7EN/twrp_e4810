@@ -1,4 +1,5 @@
 import /init.recovery.services.qcom_decrypt.rc
+import /init.recovery.qcom_decrypt.fbe.rc
 
 on fs
     # needed to make qseecomd work in recovery
@@ -65,7 +66,7 @@ service qseecomd /sbin/qseecomd
 service keymaster-3-0 /sbin/android.hardware.keymaster@3.0-service
     user root
     group root
-    setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib:/sbin:/system/lib64:/system/lib
+    setenv LD_LIBRARY_PATH /mnt/system/system/lib:/vendor/lib64:/vendor/lib:/sbin:/system/lib64:/system/lib
     disabled
     oneshot
     seclabel u:r:recovery:s0
@@ -73,7 +74,7 @@ service keymaster-3-0 /sbin/android.hardware.keymaster@3.0-service
 service keymaster-3-0-qti /sbin/android.hardware.keymaster@3.0-service-qti
     user root
     group root
-    setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib:/sbin:/system/lib64:/system/lib
+    setenv LD_LIBRARY_PATH /mnt/system/system/lib:/vendor/lib64:/vendor/lib:/sbin:/system/lib64:/system/lib
     disabled
     oneshot
     seclabel u:r:recovery:s0
@@ -81,7 +82,7 @@ service keymaster-3-0-qti /sbin/android.hardware.keymaster@3.0-service-qti
 service keymaster-4-0 /sbin/android.hardware.keymaster@4.0-service
     user root
     group root
-    setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib:/sbin:/system/lib64:/system/lib
+    setenv LD_LIBRARY_PATH /mnt/system/system/lib:/vendor/lib64:/vendor/lib:/sbin:/system/lib64:/system/lib
     disabled
     oneshot
     seclabel u:r:recovery:s0
@@ -89,7 +90,7 @@ service keymaster-4-0 /sbin/android.hardware.keymaster@4.0-service
 service keymaster-4-0-qti /sbin/android.hardware.keymaster@4.0-service-qti
     user root
     group root
-    setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib:/sbin:/system/lib64:/system/lib
+    setenv LD_LIBRARY_PATH /mnt/system/system/lib:/vendor/lib64:/vendor/lib:/sbin:/system/lib64:/system/lib
     disabled
     oneshot
     seclabel u:r:recovery:s0

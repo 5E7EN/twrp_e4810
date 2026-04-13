@@ -61,3 +61,34 @@ on property:sys.usb.ffs.ready=1
 on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
+
+    # Mount vendor so qseecomd can find its proprietary libraries at decrypt time.
+    # Use the slot-suffixed name directly since by-name/vendor may not resolve
+    # until after init processes the fstab with slotselect.
+    wait /dev/block/bootdevice/by-name/vendor${ro.boot.slot_suffix}
+    mount ext4 /dev/block/bootdevice/by-name/vendor${ro.boot.slot_suffix} /vendor ro
+
+    # Mount modem partition so QSEECom_start_app can find TA split files (.mdt/.bXX)
+    # under /vendor/firmware_mnt/image/ — required for keymaster TA loading.
+    wait /dev/block/bootdevice/by-name/modem${ro.boot.slot_suffix}
+    mount vfat /dev/block/bootdevice/by-name/modem${ro.boot.slot_suffix} /vendor/firmware_mnt ro
+
+    # Mount system partition so keymaster service can find libion.so at runtime.
+    # On this SAR device the system image has a nested system/ dir, so libs are
+    # at /mnt/system/system/lib — added to LD_LIBRARY_PATH for keymaster services.
+    mkdir /mnt/system
+    wait /dev/block/bootdevice/by-name/system${ro.boot.slot_suffix}
+    mount ext4 /dev/block/bootdevice/by-name/system${ro.boot.slot_suffix} /mnt/system ro
+
+# HACK: hwservicemanager.rc is shipped at /system/etc/init/ by qcom-common,
+# but init does not scan that path in recovery on this SAR device.
+# Define the service here as a fallback so the crypto trigger chain works.
+service hwservicemanager /sbin/hwservicemanager
+    user root
+    group root
+    onrestart setprop hwservicemanager.ready false
+    disabled
+    seclabel u:r:recovery:s0
+
+on init
+    start hwservicemanager

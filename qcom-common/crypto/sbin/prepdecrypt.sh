@@ -32,7 +32,7 @@ osver_twrp="99.87.36"
 patchlevel_twrp="2099-12-31"
 
 # Set default log level
-DEFAULT_LOGLEVEL=2
+DEFAULT_LOGLEVEL=1
 # 0 Errors only
 # 1 Errors and Information
 # 2 Errors, Information, and Debugging
