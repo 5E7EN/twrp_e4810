@@ -7,9 +7,12 @@ There are guides for that on the internet for this particular device.
 
 ### A Note on Navigation
 
-As per [this issue](https://github.com/TeamWin/Team-Win-Recovery-Project/issues/1485), TWRP doesn't support touchless devices. As such, it's recommended to use an OTG mouse instead.  
-Or, once in TWRP, connect via adb and execute OpenRecoveryScript [commands](https://twrp.me/faq/openrecoveryscript.html).  
-Lots can be accomplished with this alone.
+As per [this issue](https://github.com/TeamWin/Team-Win-Recovery-Project/issues/1485), TWRP doesn't support touchless devices. As such, I've forked TWRP and implemented it myself [here](https://github.com/5E7EN/android_bootable_recovery/tree/android-9.0).  
+To use this fork, simply sync my (2nd) forked [manifests repo](https://github.com/5E7EN/platform_manifest_twrp_omni) instead, that'll point to my modified TWRP.  
+This has already been included in the bash commands below, assuming you're following that as a guide.
+
+
+Alternatively, you can use an OTG mouse. This is untested and the kernel may not support it.   
 
 # Building TWRP
 
@@ -46,7 +49,7 @@ export PATH=~/bin:$PATH
 git config --global user.email "you@example.com"
 git config --global user.name "Your Name"
 
-repo init --depth=1 -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni.git -b twrp-9.0
+repo init --depth=1 -u https://github.com/5E7EN/platform_manifest_twrp_omni.git -b twrp-9.0
 
 apt install -y python2
 python2 --version (confirm it says version 2)
