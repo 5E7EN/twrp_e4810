@@ -18,7 +18,6 @@ Alternatively, you can use an OTG mouse. This is untested and the kernel may not
 
 Here's my curated bash history dump that yielded a successful build and boot.  
 Built within a fresh Ubuntu 22 docker container.  
-You can ignore most of the BoardConfig and device.mk edits since they're shipped with this repo.
 
 ````bash
 # on host
@@ -29,35 +28,34 @@ docker run --platform linux/amd64 -it --name twrp-e4810 -v twrp-build:/twrp ubun
 apt update && apt install -y git curl python3 python-is-python3 python3-pip bc bison \
   build-essential ccache flex g++-multilib gcc-multilib gnupg gperf \
   libncurses5-dev libssl-dev libxml2-utils lzop rsync zip zlib1g-dev \
-  openjdk-11-jdk libncurses6 cpio file locales nano libtinfo5 libncurses5
+  openjdk-11-jdk libncurses6 cpio file locales libtinfo5 libncurses5
 
-pip3 install twrpdtgen
+mkdir /twrp
+cd /twrp 
 
-mkdir /twrp && cd /twrp (might already exist so just cd)
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
 
-# on host
-docker cp <path-to-stock-boot.img> twrp-e4810:/twrp/stock-boot.img
+# clone this device tree
+git clone https://github.com/5E7EN/twrp_e4810
 
-# in container
-python3 -m twrpdtgen stock-boot.img
+# move it where it's expected
+mkdir -p device/kyocera/E4810
+mv twrp_e4810/* device/kyocera/E4810/
 
+# install repo
 mkdir -p ~/bin
 curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
 chmod +x ~/bin/repo
 export PATH=~/bin:$PATH
 
-git config --global user.email "you@example.com"
-git config --global user.name "Your Name"
-
 repo init --depth=1 -u https://github.com/5E7EN/platform_manifest_twrp_omni.git -b twrp-9.0
-
 repo sync -j$(nproc) --no-clone-bundle --no-tags # if you encounter rate limiting, use lesser connections instead (-j1 or -j2)
 
 apt install -y python2
 python2 --version (confirm it says version 2)
 export PYTHON=python2
 
-mv output device
 export ALLOW_MISSING_DEPENDENCIES=true
 . build/envsetup.sh
 
@@ -68,21 +66,6 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
 lunch omni_E4810-eng
-
-# modify default board configs
-nano device/kyocera/E4810/BoardConfig.mk
-    # remove AVB flag
-    - change `BOARD_AVB_ENABLE := true` to `BOARD_AVB_ENABLE := false`
-    # disable OTA (since missing bootctrl.msm8937 and minimal omni TWRP doesn't support)
-    - change `AB_OTA_UPDATER := true` to `AB_OTA_UPDATER := false`
-
-# modify default device config
-nano device/kyocera/E4810/device.mk
-replace entire file with:
-\```
-LOCAL_PATH := device/kyocera/E4810
-# Minimal without OTA and bootctrl (since omni minimal doesn't support out of the box)
-\```
 
 # use python 2
 alias python=python2
