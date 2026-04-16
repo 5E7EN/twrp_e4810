@@ -16,7 +16,7 @@ Alternatively, you can use an OTG mouse. This is untested and the kernel may not
 
 # Building TWRP
 
-Here's my curated bash history dump that yielded a successful build and boot.  
+Here's my curated (and now, modified) bash history dump that yielded a successful build and boot.  
 Built within a fresh Ubuntu 22 docker container.  
 
 ````bash
