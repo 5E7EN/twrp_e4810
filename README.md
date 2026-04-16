@@ -51,6 +51,8 @@ git config --global user.name "Your Name"
 
 repo init --depth=1 -u https://github.com/5E7EN/platform_manifest_twrp_omni.git -b twrp-9.0
 
+repo sync -j$(nproc) --no-clone-bundle --no-tags # if you encounter rate limiting, use lesser connections instead (-j1 or -j2)
+
 apt install -y python2
 python2 --version (confirm it says version 2)
 export PYTHON=python2
